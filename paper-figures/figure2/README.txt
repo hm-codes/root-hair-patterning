@@ -9,4 +9,4 @@ with parameters:
 signal = 0.0156
 noise = 0.5
 
-Figure 2B can be reproduced using 'plotting_02.m'
+Figure 2B - 'plotting_02.m'
