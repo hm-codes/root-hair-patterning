@@ -31,7 +31,12 @@ noise = 0.5;
 %% INPUT DISTRIBUTIONS
 
 % cell type according to cortical celft position
+% experiment
 corticalClefts = ["H","N","H","N","H","N","H","N","N","H","N","N","H","H","N","N","H","N","N"];
+% wt1
+% corticalClefts = ["H","N","N","H","N","H","N","H","N","N","H","N","H","N","N","H","N","H","N"];
+%scm1
+% corticalClefts = ["H","N","H","N","H","N","H","N","N","H","N","N","H","N","H","N","N"];
 
 % cortical signal distribution [A (binary), B (diffuse)]
 distC = "A";
@@ -120,6 +125,9 @@ results_GL2 = zeros(numRepeats,4);
 results_cpc = zeros(numRepeats,4);
 results_WER = zeros(numRepeats,4);
 
+concentrations = zeros(numRepeats,16,L);
+timecourse = zeros(numRepeats,L,NT-1);
+
 %% experiment
 
 for seed = 1:numRepeats
@@ -187,6 +195,7 @@ for seed = 1:numRepeats
         % total inhibior and activator
         I_T = I_GC + I_EC;
         A_T = A_GW + A_EW + A_GM + A_EM;
+        timecourse(seed,:,i-1) = A_T;
 
         % reactions
         G_new = G + dt*fG(g,G,W,A_GW,M,A_GM,C,I_GC);
@@ -255,6 +264,7 @@ for seed = 1:numRepeats
 
     end
 
+    concentrations(seed,:,:) = [G,E,C,W,M,g,e,c,w,m,A_GW,A_EW,A_GM,A_EM,I_GC,I_EC]';
 
     %% TESTS
     % make tables
@@ -377,5 +387,9 @@ elseif root == "mutant"
     scm_results(3,:) = mean(results_WER)
 
 end
+
+%% plot
+
+crossSection_plot
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
