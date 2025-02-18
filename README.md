@@ -16,7 +16,7 @@ There are 129 combinations of successful models and parameter sets (rows), the 1
 parspace.mat - a matrix of the 20,000 random sets of the 48 parameter values. 
 parameters in the matrix are in the order such that:
 column | parameter
-1      | k11 \\
+1      | k11
 2      | k12
 3      | k13
 4      | k14
